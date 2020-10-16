@@ -25,7 +25,7 @@ function load_exp()
 		exp_data = load(exp_filename);
 		opt_data.cmp_data.c = sim_struct.sys_inputs.Crate*exp_data.phi_applied_times(1:end-1)*sim_struct.sys_inputs.td/3600+sim_struct.sys_inputs_n.cs0.c;
 		opt_data.cmp_data.V =  Vstd - (sim_struct.sys_inputs.k*sim_struct.sys_inputs.Tref/sim_struct.sys_inputs.e).*exp_data.phi_applied(1:end-1);
-		opt_data.cmp_data.t = exp_data.partTrodecvol0part0_cbar_times*sim_struct.sys_inputs.td/3600;
+		opt_data.cmp_data.t = exp_data.phi_applied_times*sim_struct.sys_inputs.td/3600;
 		opt_data.cmp_data.cs = zeros(length(eval(sprintf("exp_data.partTrodecvol%dpart0_cbar'", 0))),Nv);
 		for i=0:Nv-1
 	    	opt_data.cmp_data.cs(:,i+1) = eval(sprintf("exp_data.partTrodecvol%dpart0_cbar'", i));

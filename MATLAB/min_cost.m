@@ -32,7 +32,7 @@ function J = min_cost(params)
 		opt_data.stop_flag = 0;
 		load_sim(opt_data.funccount);
 		if opt_data.stop_flag ~= 1
-			final_time = round(sim_struct.sim_data.partTrodecvol0part0_cbar_times(end)*sim_struct.sys_inputs.td);
+			final_time = round(sim_struct.sim_data.phi_applied_times(end)*sim_struct.sys_inputs.td);
 		else
 			final_time = 0;
 		end
@@ -48,7 +48,7 @@ function J = min_cost(params)
 		J_c = Jcost();
 		J_v = Vcost();
 		J = opt_data.rho_cost*J_v + (1-opt_data.rho_cost)*J_c;
-		if opt_data.ref_J == 0;
+		if opt_data.ref_J == 0
 			opt_data.ref_J = J;
 		end
 		J = J/opt_data.ref_J;

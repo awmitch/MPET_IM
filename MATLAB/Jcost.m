@@ -3,7 +3,7 @@ function J_c = Jcost()
     global opt_data
 
     Nv = double(sim_struct.sys_inputs_n.Nvol.c);
-	t_sim = sim_struct.sim_data.partTrodecvol0part0_cbar_times*sim_struct.sys_inputs.td/3600;
+	t_sim = sim_struct.sim_data.phi_applied_times*sim_struct.sys_inputs.td/3600;
 	cs_sim = zeros(length(eval(sprintf("sim_struct.sim_data.partTrodecvol%dpart0_cbar'", 0))),sim_struct.sys_inputs_n.Nvol.c);
 	for i=0:sim_struct.sys_inputs_n.Nvol.c-1
 	    cs_sim(:,i+1) = eval(sprintf("sim_struct.sim_data.partTrodecvol%dpart0_cbar'", i));
