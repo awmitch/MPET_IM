@@ -179,6 +179,7 @@ def get_dicts_from_configs(P_s, P_e):
         dD["dgammadc"] = P.getfloat('Material', 'dgammadc')
         ndD["cwet"] = P.getfloat('Material', 'cwet')
         ndD["muRfunc"] = P.get('Material', 'muRfunc')
+        ndD["OCV_flag"] = P.getboolean('Material', 'OCV_flag')
         ndD["logPad"] = P.getboolean('Material', 'logPad')
         ndD["noise"] = P.getboolean('Material', 'noise')
         ndD["noise_prefac"] = P.getfloat('Material', 'noise_prefac')

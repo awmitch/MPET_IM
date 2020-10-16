@@ -201,7 +201,7 @@ class Mod2var(dae.daeModel):
                 beta_s = self.ndD["beta_s"]
                 shape = self.ndD["shape"]
                 kappa = self.ndD["kappa"]
-                r_vec = geo.get_unit_solid_discr(shape, N, Ar)[0]
+                r_vec = geo.get_unit_solid_discr(shape, N)[0]
                 dr = r_vec[1] - r_vec[0]
                 Rs = 1.
                 curv1 = (2./Rs)*beta_s + (2*c1[-2] - 2*c1[-1] + 2*dr*beta_s)/dr**2
@@ -431,12 +431,11 @@ class Mod1var(dae.daeModel):
                 beta_s = self.ndD["beta_s"]
                 shape = self.ndD["shape"]
                 kappa = self.ndD["kappa"]
-                r_vec = geo.get_unit_solid_discr(shape, N, Ar)[0]
+                r_vec = geo.get_unit_solid_discr(shape, N)[0]
                 dr = r_vec[1] - r_vec[0]
                 Rs = 1.
                 curv = (2./Rs)*beta_s + (2*c[-2] - 2*c[-1] + 2*dr*beta_s)/dr**2
-                OCV = np.array([OCVfuncs[i]() for i in range(len(c))])
-                muR_surf = OCV_surf(ndD["muR_ref"][-1],c_surf) - kappa*curve
+                muR_surf = OCV_surf(ndD["muR_ref"][-1],c_surf) - kappa*curv
             else:
                 muR_surf = muR[-1]
             if actR is None:

@@ -1,0 +1,84 @@
+Cannot import simulator modules. Error: /usr/lib/python3/dist-packages/PyQt5/QtCore.cpython-36m-x86_64-linux-gnu.so: symbol _ZTI9QRunnable version Qt_5 not defined in file libQt5Core.so.5 with link time reference
+***********************************************************************
+ 0.00% ETA: [00.0s]                                 Version:   1.8.0
+ 0.00% ETA: [00.0s]                                 Copyright: Dragan Nikolic, 2017       
+ 0.00% ETA: [00.0s]                                 Homepage:  http://www.daetools.com    
+ 0.00% ETA: [00.0s]       @                       @                                       
+ 0.00% ETA: [00.0s]       @   @@@@@     @@@@@   @@@@@    @@@@@    @@@@@   @      @@@@@    
+ 0.00% ETA: [00.0s]  @@@@@@        @   @     @    @     @     @  @     @  @     @         
+ 0.00% ETA: [00.0s] @     @   @@@@@@   @@@@@@     @     @     @  @     @  @      @@@@@    
+ 0.00% ETA: [00.0s] @     @  @     @   @          @     @     @  @     @  @           @   
+ 0.00% ETA: [00.0s]  @@@@@@   @@@@@@    @@@@@      @@@   @@@@@    @@@@@    @@@@  @@@@@    
+ 0.00% ETA: [00.0s]                                                                       
+ 0.00% ETA: [00.0s]***********************************************************************
+ 0.00% ETA: [00.0s] DAE Tools is free software: you can redistribute it and/or modify     
+ 0.00% ETA: [00.0s] it under the terms of the GNU General Public License version 3        
+ 0.00% ETA: [00.0s] as published by the Free Software Foundation.                         
+ 0.00% ETA: [00.0s] DAE Tools is distributed in the hope that it will be useful,          
+ 0.00% ETA: [00.0s] but WITHOUT ANY WARRANTY; without even the implied warranty of        
+ 0.00% ETA: [00.0s] MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      
+ 0.00% ETA: [00.0s] General Public License for more details.                              
+ 0.00% ETA: [00.0s] You should have received a copy of the GNU General Public License     
+ 0.00% ETA: [00.0s] along with this program. If not, see <http://www.gnu.org/licenses>.   
+ 0.00% ETA: [00.0s]***********************************************************************
+ 0.00% ETA: [00.0s]Creating the system...        
+ 0.00% ETA: [00.0s]The system created successfully in: 27.123 s
+ 0.00% ETA: [00.0s]Starting the initialization of the system... Done.
+ 0.00% ETA: [00.0s]Integrating from 0.00 to 1800.00 s ...
+ 0.00% ETA: [00.0s]Integrating from 1800.00 to 3600.00 s ...
+ 1.00% ETA: [18h 35m 36.0s]Integrating from 3600.00 to 5400.00 s ...
+ 3.00% ETA: [06h 18m 00.1s]Integrating from 5400.00 to 7200.00 s ...
+ 5.00% ETA: [03h 46m 54.4s]Integrating from 7200.00 to 9000.00 s ...
+ 7.00% ETA: [02h 45m 23.2s]Integrating from 9000.00 to 10800.00 s ...
+ 9.00% ETA: [02h 06m 35.7s]Integrating from 10800.00 to 12600.00 s ...
+ 11.00% ETA: [01h 42m 06.9s]Integrating from 12600.00 to 14400.00 s ...
+ 13.00% ETA: [01h 27m 28.1s]Integrating from 14400.00 to 16200.00 s ...
+ 15.00% ETA: [01h 14m 13.6s]Integrating from 16200.00 to 18000.00 s ...
+ 17.00% ETA: [01h 04m 05.6s]Integrating from 18000.00 to 19800.00 s ...
+ 19.00% ETA: [56m 08.9s]Integrating from 19800.00 to 21600.00 s ...
+ 21.00% ETA: [49m 44.2s]Integrating from 21600.00 to 23400.00 s ...
+ 23.00% ETA: [44m 23.0s]Integrating from 23400.00 to 25200.00 s ...
+ 25.00% ETA: [40m 31.2s]Integrating from 25200.00 to 27000.00 s ...
+ 26.00% ETA: [41m 12.1s]Integrating from 27000.00 to 28800.00 s ...
+ 28.00% ETA: [39m 20.4s]Integrating from 28800.00 to 30600.00 s ...
+ 30.00% ETA: [37m 56.1s]Integrating from 30600.00 to 32400.00 s ...
+ 32.00% ETA: [35m 35.9s]Integrating from 32400.00 to 34200.00 s ...
+ 34.00% ETA: [33m 14.5s]Integrating from 34200.00 to 36000.00 s ...
+ 36.00% ETA: [30m 54.0s]Integrating from 36000.00 to 37800.00 s ...
+ 38.00% ETA: [28m 30.7s]Integrating from 37800.00 to 39600.00 s ...
+ 40.00% ETA: [26m 17.9s]Integrating from 39600.00 to 41400.00 s ...
+ 42.00% ETA: [24m 41.7s]Integrating from 41400.00 to 43200.00 s ...
+ 44.00% ETA: [32m 06.5s]Integrating from 43200.00 to 45000.00 s ...
+ 46.00% ETA: [31m 38.0s]Integrating from 45000.00 to 46800.00 s ...
+ 48.00% ETA: [30m 23.6s]Integrating from 46800.00 to 48600.00 s ...
+ 50.00% ETA: [29m 05.5s]Integrating from 48600.00 to 50400.00 s ...
+ 51.00% ETA: [28m 45.8s]Integrating from 50400.00 to 52200.00 s ...
+ 53.00% ETA: [27m 26.6s]Integrating from 52200.00 to 54000.00 s ...
+ 55.00% ETA: [26m 00.3s]Integrating from 54000.00 to 55800.00 s ...
+ 57.00% ETA: [24m 43.3s]Integrating from 55800.00 to 57600.00 s ...
+ 59.00% ETA: [23m 26.6s]Integrating from 57600.00 to 59400.00 s ...
+ 61.00% ETA: [22m 04.6s]Integrating from 59400.00 to 61200.00 s ...
+ 63.00% ETA: [20m 51.6s]Integrating from 61200.00 to 63000.00 s ...
+ 65.00% ETA: [19m 45.2s]Integrating from 63000.00 to 64800.00 s ...
+ 67.00% ETA: [18m 32.3s]Integrating from 64800.00 to 66600.00 s ...
+ 69.00% ETA: [17m 25.2s]Integrating from 66600.00 to 68400.00 s ...
+ 71.00% ETA: [16m 16.2s]Integrating from 68400.00 to 70200.00 s ...
+ 73.00% ETA: [15m 06.2s]Integrating from 70200.00 to 72000.00 s ...
+ 75.00% ETA: [13m 54.4s]Integrating from 72000.00 to 73800.00 s ...
+ 76.00% ETA: [13m 27.6s]Integrating from 73800.00 to 75600.00 s ...
+ 78.00% ETA: [12m 20.2s]Integrating from 75600.00 to 77400.00 s ...
+ 80.00% ETA: [11m 11.5s]Integrating from 77400.00 to 79200.00 s ...
+ 82.00% ETA: [10m 05.3s]Integrating from 79200.00 to 81000.00 s ...
+ 84.00% ETA: [08m 59.8s]Integrating from 81000.00 to 82800.00 s ...
+ 86.00% ETA: [07m 52.0s]Integrating from 82800.00 to 84600.00 s ...
+ 88.00% ETA: [06m 45.8s]Integrating from 84600.00 to 86400.00 s ...
+ 90.00% ETA: [05m 37.4s]Integrating from 86400.00 to 88200.00 s ...
+ 92.00% ETA: [04m 30.9s]Integrating from 88200.00 to 90000.00 s ...
+ 94.00% ETA: [03m 23.7s]Integrating from 90000.00 to 91800.00 s ...
+ 96.00% ETA: [02m 16.9s]Integrating from 91800.00 to 93600.00 s ...
+ 98.00% ETA: [01m 08.9s]
+
+Used parameter file /home/amitchell/Documents/MPET/07-Sep-2020/23:33:33/configs/params_system_1.cfg
+
+
+Total time: 978.4121732711792 s
