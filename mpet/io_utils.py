@@ -191,6 +191,10 @@ def get_dicts_from_configs(P_s, P_e):
         dD["lambda"] = P.getfloat('Reactions', 'lambda')
         dD["Rfilm"] = P.getfloat('Reactions', 'Rfilm')
 
+        # SEI layer
+        dD["gamma_side"] = P.getfloat('Reactions', 'gamma_side')
+        dD["side"] = P.getfloat('Reactions', 'side')
+
         # electrode parameters
         dD_e[trode] = dD.copy()
         ndD_e[trode] = ndD.copy()
@@ -297,6 +301,10 @@ def get_dicts_from_configs(P_s, P_e):
         ndD_s["G"][trode] = (
             dD_s["G"][trode] * (k*T_ref/e) * t_ref
             / (F*dD_e[trode]["csmax"]*vols))
+
+        # SEI layer parameters
+        ndD_e[trode]["gamma_side"] = dD_e[trode]["gamma_side"]
+        ndD_e[trode]["side"] = dD_e[trode]["side"]
 
         # Electrode particle parameters
         ndD_e[trode]["lambda"] = dD_e[trode]["lambda"]/(k*T_ref)

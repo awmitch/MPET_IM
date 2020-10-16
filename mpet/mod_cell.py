@@ -193,8 +193,14 @@ class ModCell(dae.daeModel):
                 for pInd in range(Npart[trode]):
                     # The volume of this particular particle
                     Vj = ndD["psd_vol_FracVol"][trode][vInd,pInd]
-                    RHS += -(ndD["beta"][trode] * (1-ndD["poros"][trode]) * ndD["P_L"][trode] * Vj
+                    try:
+                        self.particles[trode][vInd,pInd].dcsidedt()
+                    except:
+                    	RHS += -(ndD["beta"][trode] * (1-ndD["poros"][trode]) * ndD["P_L"][trode] * Vj
                              * self.particles[trode][vInd,pInd].dcbardt())
+                    else:
+                    	RHS += -(ndD["beta"][trode] * (1-ndD["poros"][trode]) * ndD["P_L"][trode] * Vj
+                             * (self.particles[trode][vInd,pInd].dcbardt() + self.particles[trode][vInd,pInd].dcsidedt()))
                 eq.Residual = self.R_Vp[trode](vInd) - RHS
 
         # Define output port variables

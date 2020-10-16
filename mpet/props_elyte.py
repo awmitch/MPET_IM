@@ -92,6 +92,40 @@ def valoen_reimers():
             k*Tref/(e**2*Dref*N_A*(1000*cref)))
     return D_ndim, sigma_ndim, therm_fac, tp0, Dref
 
+def valoen_reimers2():
+    """ Set of parameters from Morales Escalante, et al. 2020, indirectly from Valoen and Reimers 2005."""
+    def tp0(c):
+        return 0.33
+
+    def D(c):
+        return (
+            6.9864e-10 * np.exp(-0.00087637 * c*1000))  # m^2/s
+
+    def therm_fac(c):
+        return 1.
+
+    def sigma(c):
+        (k00, k01, k02,
+         k10, k11, k12,
+         k20, k21) = (
+            -41.5292, 0, 0,
+            -0.009626*1000, 0, 0,
+            1.518e-6*1000*1000, 0)
+        out = c * (k00 + k01*Tref + k02*Tref**2
+                   + k10*c + k11*c*Tref + k12*c*Tref**2
+                   + k20*c**2 + k21*c**2*Tref)**2  # mS/cm
+        out *= 1.4492e-6*1000 # S/m
+        return out
+    Dref = D(cref)
+
+    def D_ndim(c):
+        return D(c) / Dref
+
+    def sigma_ndim(c):
+        return sigma(c) * (
+            k*Tref/(e**2*Dref*N_A*(1000*cref)))
+    return D_ndim, sigma_ndim, therm_fac, tp0, Dref
+
 
 def valoen_bernardi():
     """ Set of parameters from Bernardi and Go 2011, indirectly from

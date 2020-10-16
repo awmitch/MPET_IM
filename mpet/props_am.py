@@ -367,7 +367,8 @@ class muRfuncs():
 
     def LiFePO4(self, y, ybar, muR_ref, ISfuncs=None):
         """ Bai, Cogswell, Bazant 2011 """
-        muRtheta = -self.eokT*3.422
+        #muRtheta = -self.eokT*3.422
+        muRtheta = -self.eokT*0.08847
         muRhomog = self.reg_sln(y, self.ndD["Omga"], ISfuncs)
         muRnonHomog = self.general_non_homog(y, ybar)
         muR = muRhomog + muRnonHomog
@@ -377,7 +378,8 @@ class muRfuncs():
 
     def LiC6(self, y, ybar, muR_ref, ISfuncs=(None, None)):
         """ Ferguson and Bazant 2014 """
-        muRtheta = -self.eokT*0.12
+        #muRtheta = -self.eokT*0.12
+        muRtheta = -self.eokT*0.08847
         ndD = self.ndD
         muR1homog, muR2homog = self.graphite_2param_homog(
             y, ndD["Omga"], ndD["Omgb"], ndD["Omgc"], ndD["EvdW"], ISfuncs)

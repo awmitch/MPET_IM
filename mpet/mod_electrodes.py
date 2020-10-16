@@ -60,6 +60,8 @@ class Mod2var(dae.daeModel):
         else:
             self.Rxn1 = dae.daeVariable("Rxn1", dae.no_t, self, "Rate of reaction 1", [self.Dmn])
             self.Rxn2 = dae.daeVariable("Rxn2", dae.no_t, self, "Rate of reaction 2", [self.Dmn])
+        if ndD["side"] == 1:
+            self.dcsidedt = dae.daeVariable("dcsidedt", dae.no_t, self, "Rate of SEI formation")
 
         #Get reaction rate function from dictionary name
         self.calc_rxn_rate=getattr(reactions,ndD["rxnType"])
@@ -195,8 +197,21 @@ class Mod2var(dae.daeModel):
                 (c1, c2), (self.c1bar(), self.c2bar()), T, ndD, ISfuncs)
             c1_surf = c1[-1]
             c2_surf = c2[-1]
-            mu1R_surf, act1R_surf = mu1R[-1], act1R[-1]
-            mu2R_surf, act2R_surf = mu2R[-1], act2R[-1]
+            if ndD["OCV_flag"]:
+                beta_s = self.ndD["beta_s"]
+                shape = self.ndD["shape"]
+                kappa = self.ndD["kappa"]
+                r_vec = geo.get_unit_solid_discr(shape, N, Ar)[0]
+                dr = r_vec[1] - r_vec[0]
+                Rs = 1.
+                curv1 = (2./Rs)*beta_s + (2*c1[-2] - 2*c1[-1] + 2*dr*beta_s)/dr**2
+                curv2 = (2./Rs)*beta_s + (2*c2[-2] - 2*c2[-1] + 2*dr*beta_s)/dr**2
+                mu_OCV = OCV_surf(ndD["muR_ref"][-1],(c1_surf+c2_surf)/2)
+                mu1R_surf, act1R_surf = mu_OCV - kappa*curv1, act1R[-1]
+                mu2R_surf, act2R_surf = mu_OCV - kappa*curv2, act2R[-1]
+            else:
+                mu1R_surf, act1R_surf = mu1R[-1], act1R[-1]
+                mu2R_surf, act2R_surf = mu2R[-1], act2R[-1]
         eta1 = calc_eta(mu1R_surf, muO)
         eta2 = calc_eta(mu2R_surf, muO)
         if ndD["type"] in ["ACR2"]:
@@ -227,8 +242,16 @@ class Mod2var(dae.daeModel):
         if ndD["type"] in ["diffn2", "CHR2"]:
             # Positive reaction (reduction, intercalation) is negative
             # flux of Li at the surface.
-            Flux1_bc = -0.5 * self.Rxn1()
-            Flux2_bc = -0.5 * self.Rxn2()
+            if ndD["side"] == 1:
+                # Define rate of SEI formation on particle
+                eq = self.CreateEquation("dcsidedt")
+                w = np.tanh(ndD["gamma_side"] * (1-(c1_surf+c2_surf)/2))
+                eq.Residual = self.dcsidedt() -  3/4 * (self.Rxn1()+self.Rxn2()) * (1-w)
+                Flux1_bc = -0.5 * self.Rxn1() * w
+                Flux2_bc = -0.5 * self.Rxn2() * w
+            else:
+                Flux1_bc = -0.5 * self.Rxn1()
+                Flux2_bc = -0.5 * self.Rxn2()
             Dfunc = props_am.Dfuncs(ndD["Dfunc"]).Dfunc
             if ndD["type"] == "diffn2":
                 pass
@@ -295,6 +318,8 @@ class Mod1var(dae.daeModel):
             self.Rxn = dae.daeVariable("Rxn", dae.no_t, self, "Rate of reaction")
         else:
             self.Rxn = dae.daeVariable("Rxn", dae.no_t, self, "Rate of reaction", [self.Dmn])
+        if ndD["side"] == 1:
+            self.dcsidedt = dae.daeVariable("dcsidedt", dae.no_t, self, "Rate of SEI formation")
 
         #Get reaction rate function from dictionary name
         self.calc_rxn_rate=getattr(reactions,ndD["rxnType"])
@@ -402,7 +427,18 @@ class Mod1var(dae.daeModel):
         elif ndD["type"] in ["diffn", "CHR"]:
             muR, actR = calc_muR(c, self.cbar(), T, ndD, ISfuncs)
             c_surf = c[-1]
-            muR_surf = muR[-1]
+            if ndD["OCV_flag"]:
+                beta_s = self.ndD["beta_s"]
+                shape = self.ndD["shape"]
+                kappa = self.ndD["kappa"]
+                r_vec = geo.get_unit_solid_discr(shape, N, Ar)[0]
+                dr = r_vec[1] - r_vec[0]
+                Rs = 1.
+                curv = (2./Rs)*beta_s + (2*c[-2] - 2*c[-1] + 2*dr*beta_s)/dr**2
+                OCV = np.array([OCVfuncs[i]() for i in range(len(c))])
+                muR_surf = OCV_surf(ndD["muR_ref"][-1],c_surf) - kappa*curve
+            else:
+                muR_surf = muR[-1]
             if actR is None:
                 actR_surf = None
             else:
@@ -429,7 +465,14 @@ class Mod1var(dae.daeModel):
         elif ndD["type"] in ["diffn", "CHR"]:
             # Positive reaction (reduction, intercalation) is negative
             # flux of Li at the surface.
-            Flux_bc = -self.Rxn()
+            if ndD["side"] == 1:
+                # Define rate of SEI formation on particle
+                eq = self.CreateEquation("dcsidedt")
+                w = np.tanh(ndD["gamma_side"] * (1-c_surf))
+                eq.Residual = self.dcsidedt() -  3 * (1-w) * self.Rxn() 
+                Flux_bc = -self.Rxn() * w
+            else:
+                Flux_bc = -self.Rxn()
             Dfunc = props_am.Dfuncs(ndD["Dfunc"]).Dfunc
             if ndD["type"] == "diffn":
                 Flux_vec = calc_flux_diffn(c, ndD["D"], Dfunc, Flux_bc, dr, T)
@@ -528,6 +571,10 @@ def calc_muR(c, cbar, T, ndD, ISfuncs=None):
     muR, actR = muRfunc(c, cbar, muR_ref, ISfuncs)
     return muR, actR
 
+def OCV_surf(muR_ref,c_surf):
+    OCV = (5.638 + 1.09*np.exp(-13.23*c_surf) + 0.003622*np.tanh(-(c_surf -0.2905)/0.0152) -2.022*np.tanh((c_surf -1.376 )/0.1839)  -12.12*np.tanh((c_surf + 0.007597)/0.005092) -0.01253*np.tanh((c_surf -0.5646)/0.05742)-0.02946*np.tanh((c_surf-0.1779)/-0.02292)-0.0368*np.tanh((c_surf-0.02385)/-0.005836)-4.478*np.tanh((c_surf+0.3037)/-0.002818))
+    muR_surf = -(1.602e-19/(1.381e-23*298))*OCV + muR_ref
+    return muR_surf
 
 def MX(mat, objvec):
     if not isinstance(mat, sprs.csr.csr_matrix):
