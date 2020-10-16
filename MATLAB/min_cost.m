@@ -48,11 +48,10 @@ function J = min_cost(params)
 		J_c = Jcost();
 		J_v = Vcost();
 		J = opt_data.rho_cost*J_v + (1-opt_data.rho_cost)*J_c;
-		if opt_data.Jscale_flag == 1
-			if opt_data.ref_J == 0;
-				opt_data.ref_J = J;
-			end
-			J = J/opt_data.ref_J;
+		if opt_data.ref_J == 0;
+			opt_data.ref_J = J;
+		end
+		J = J/opt_data.ref_J;
 		end	
 		fprintf('J_c = %5.3e\n',J_c);
 		fprintf('J_V = %5.3e\n',J_v);
