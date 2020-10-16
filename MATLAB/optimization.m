@@ -15,12 +15,10 @@ function optimization(param_fun,init_dir)
 		sweep.param = zeros(length(opt_data.var_list),opt_data.num_restarts+1);
 	end	
 	for reboot = 1:opt_data.num_restarts+1
-		%opt_data.directories = ["./"; %MATLAB folder
-		%			"./"; %output data folder
-		%			"./../"]; %mpet folder
-		opt_data.directories = ["~/Dropbox/Graduate/Research/Code/MPET_IM2/MATLAB/"; 
-					"~/Documents/MPET/"; 
-					"~/Dropbox/Graduate/Research/Code/MPET_IM2/"];
+		opt_data.directories = ["./"; %MATLAB folder
+					"./"; %output data folder
+					"./../"]; %mpet folder
+
 		init_sys();
 		if reboot == 1
 			load_sim('init_dir');
