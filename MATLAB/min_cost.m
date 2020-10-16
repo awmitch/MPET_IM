@@ -52,7 +52,7 @@ function J = min_cost(params)
 			opt_data.ref_J = J;
 		end
 		J = J/opt_data.ref_J;
-		end	
+
 		fprintf('J_c = %5.3e\n',J_c);
 		fprintf('J_V = %5.3e\n',J_v);
 		fprintf('J = %5.3f\n',J);
