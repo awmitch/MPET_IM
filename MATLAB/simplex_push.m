@@ -29,7 +29,7 @@ function kill_flag = simplex_push(procedure)
 		opt_data.max_xtol = [opt_data.max_xtol max(max(abs(opt_data.simplex_par(2:end,:)-opt_data.simplex_par(ones(1,length(opt_data.var_list)),:))))];
 		opt_data.max_ftol = [opt_data.max_ftol max(abs(opt_data.simplex_J(1)-opt_data.simplex_J(2:end)))];
 		fprintf('procedure: %s\n',procedure);
-		fprintf('%8s\n',opt_data.var_str);
+		%fprintf('%8s\n',opt_data.var_str);
 		fprintf([repmat('%5.3f ', 1, size(opt_data.simplex_par,2)-1), '%5.3f\n'],opt_data.simplex_par.');
 		fprintf('%5.3f\n',opt_data.simplex_J');
 		fprintf('Max parameter difference:%5.3f\n',opt_data.max_xtol(end));
